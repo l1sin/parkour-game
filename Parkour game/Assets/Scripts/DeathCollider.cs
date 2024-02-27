@@ -6,7 +6,6 @@ public class DeathCollider : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            //other.GetComponent<CharacterHealth>().Die();
             Debug.Log("Death");
         }
     }
