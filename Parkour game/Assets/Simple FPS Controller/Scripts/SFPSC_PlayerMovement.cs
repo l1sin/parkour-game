@@ -96,7 +96,7 @@ public class SFPSC_PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             // Jump
-            if (Input.GetButton("Jump") && !jumpBlocked)
+            if (Input.GetButton("Jump") && !jumpBlocked && !wallRun.IsWallRunning)
             {
                 rb.AddForce(-jumpForce * rb.mass * Vector3.down);
                 jumpBlocked = true;

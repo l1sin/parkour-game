@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc92d25c90c69a4fb16ec24abd60863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxGrappleDistance: 75
+  maxGrappleDistance: 50
   rope: {fileID: 398632413549310816}
   maximumSpeed: 100
   deceleration: 2500
