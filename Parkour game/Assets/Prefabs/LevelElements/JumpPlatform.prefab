@@ -367,3 +367,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _force: 1000
+  _audioMixerGroup: {fileID: -1704924787224313407, guid: c99f098306b88594b98111629e50f3ad,
+    type: 2}
+  _sound: {fileID: 8300000, guid: e3904414031a57d43a27b1a320c8a92b, type: 3}

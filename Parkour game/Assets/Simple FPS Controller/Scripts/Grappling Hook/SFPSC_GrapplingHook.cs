@@ -9,9 +9,10 @@
     █▄▄ █▄█   ▀█▀ █ █ █▀▀   █▀▄ █▀▀ █ █ █▀▀ █   █▀█ █▀█ █▀▀ █▀█
     █▄█  █     █  █▀█ ██▄   █▄▀ ██▄ ▀▄▀ ██▄ █▄▄ █▄█ █▀▀ ██▄ █▀▄
 */
+using Sounds;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(SFPSC_PlayerMovement))] // PlayerMovement also requires Rigidbody
 public class SFPSC_GrapplingHook : MonoBehaviour
@@ -24,6 +25,10 @@ public class SFPSC_GrapplingHook : MonoBehaviour
     private SFPSC_PlayerMovement pm;
     private Rigidbody rb;
     private int segments;
+
+    [SerializeField] private AudioMixerGroup _audioMixerGroup;
+    [SerializeField] private AudioClip _grappleSound;
+
     private void Start()
     {
         segments = rope.segments;
@@ -50,16 +55,16 @@ public class SFPSC_GrapplingHook : MonoBehaviour
                 }
             }
 
-            _else:
+        _else:
             crossHairSpinningPart.gameObject.SetActive(false);
         }
-        _out:
+    _out:
 
         if (!isGrappling)
         {
             if (Input.GetKeyDown(SFPSC_KeyManager.Grapple))
                 Grapple();
-            
+
             return;
         }
         else
@@ -116,6 +121,8 @@ public class SFPSC_GrapplingHook : MonoBehaviour
 
                 rb.useGravity = false;
                 isGrappling = true;
+
+                SoundManager.Instance.PlaySound(_grappleSound, _audioMixerGroup);
             }
         }
     }
@@ -137,7 +144,7 @@ public class SFPSC_GrapplingHook : MonoBehaviour
         rope.UnGrapple();
 
         Invoke("UnblockGrapple", grappleCooldown);
-        
+
         rb.useGravity = true;
         isGrappling = false;
     }
@@ -167,11 +174,11 @@ public class SFPSC_GrapplingHook : MonoBehaviour
     {
         if (location == null)
             return;
-        
+
         targetDistance = Vector3.Distance(transform.position, location.position);
         rope.segments = (int)((targetDistance / maxGrappleDistance) * segments);
         dir = (location.position - transform.position).normalized;
-        
+
         rb.velocity = Vector3.Lerp(rb.velocity, dir * maximumSpeed * Mathf.Clamp01(targetDistance / (4.0f * distanceToStop)), Time.deltaTime);
 
         // Rope updating

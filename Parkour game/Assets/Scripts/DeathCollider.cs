@@ -6,7 +6,7 @@ public class DeathCollider : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            Debug.Log("Death");
+            LevelController.Instance.TriggerLose();
         }
     }
 }
