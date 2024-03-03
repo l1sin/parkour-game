@@ -108,7 +108,6 @@ public class SFPSC_WallRun : MonoBehaviour
         {
             rb.AddForce((hitInfo.normal * jumpWallMultiplier + transform.forward * jumpForwardMultiplier + Vector3.up * jumpUpMultiplier).normalized * rb.mass * jumpForce);
             StopWallRunning();
-            Debug.Log((hitInfo.normal * jumpWallMultiplier + transform.forward * jumpForwardMultiplier + Vector3.up * jumpUpMultiplier).normalized);
             isJumpAvailable = false;
             Invoke(nameof(UnblockJump), jumpBlockTime);
             return;
